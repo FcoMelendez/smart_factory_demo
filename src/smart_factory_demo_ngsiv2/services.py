@@ -37,6 +37,22 @@ def create_advanced_asset_attributes(entity_id):
     attribute_type = "string"
     attribute_value = "STOPPED"
     lib.create_i40_asset_attribute(entity_id, attribute_id, attribute_type, attribute_value)
+    attribute_id = "oee"
+    attribute_type = "number"
+    attribute_value = 0.85
+    lib.create_i40_asset_attribute(entity_id, attribute_id, attribute_type, attribute_value)
+    attribute_id = "oeeAvailability"
+    attribute_type = "number"
+    attribute_value = 0.7
+    lib.create_i40_asset_attribute(entity_id, attribute_id, attribute_type, attribute_value)
+    attribute_id = "oeePerformance"
+    attribute_type = "number"
+    attribute_value = 0.9
+    lib.create_i40_asset_attribute(entity_id, attribute_id, attribute_type, attribute_value)
+    attribute_id = "oeeQuality"
+    attribute_type = "number"
+    attribute_value = 0.95
+    lib.create_i40_asset_attribute(entity_id, attribute_id, attribute_type, attribute_value)
     attribute_id = "i40AssetEvent"
     attribute_type = "object"
     attribute_value = {}
