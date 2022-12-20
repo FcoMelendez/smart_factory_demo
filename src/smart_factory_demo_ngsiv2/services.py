@@ -104,7 +104,7 @@ def simulate_asset_event():
     attr_value["message"]["action"] = "Check red indicators in the control unit. Check the correct placement and quantity of input materials"
     lib.update_i40_asset_attribute(entity_id, "i40AssetEvent", attr_value)
 
-# Simulation II (Asset command): Asset "B" sends one command to Asset "A" (e.g., ABORT)
+# Simulation II (Asset command): Asset "B" sends one command to Asset "A" (e.g., START)
 #--------------------------------------------------------------------------------------
 def simulate_asset_A_command():
     entity_id = "urn:ngsiv2:i40Asset:Workstation:002"
@@ -113,7 +113,7 @@ def simulate_asset_A_command():
     attr_value["attrs_array"] = ["attr0", "attr1", "attr2", "attr3"]
     lib.update_i40_asset_attribute(entity_id, "i40AssetCommand", attr_value)
 
-# Simulation III (Asset behavior): Asset "B" sends one command to Asset "A" (e.g., ABORT)
+# Simulation III (Asset behavior): Asset "B" sends one command to Asset "A" (e.g., START)
 #--------------------------------------------------------------------------------------
 def simulate_asset_B_behavior():
     entity_id = "urn:ngsiv2:i40Asset:Workstation:002"
