@@ -6,56 +6,21 @@
 	},
 	"item": [
 		{
-			"name": "Create an i40Asset",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": " {\n      \"id\":\"urn:ngsi-ld:Product:010\", \"type\":\"Product\",\n      \"name\":{\"type\":\"Text\", \"value\":\"Lemonade\"},\n      \"size\":{\"type\":\"Text\", \"value\": \"S\"},\n      \"price\":{\"type\":\"Integer\", \"value\": 99}\n}"
-				},
-				"url": {
-					"raw": "http://{{orion}}/v2/entities/",
-					"protocol": "http",
-					"host": [
-						"{{orion}}"
-					],
-					"path": [
-						"v2",
-						"entities",
-						""
-					]
-				},
-				"description": "This example adds a new **Product** entity to the context.\n\nNew entities can be added by making a POST request to the `/v2/entities/` endpoint.\n\nThe request will **fail** if any of the attributes already exist in the context.\n\nAny entity must have a `id` and `type` attributes, each additional attributes are optional \nand will depend on the system being described. Each additional attribute should also have a \ndefined `type` and a `value` attribute. The product has been assigned a unique `id` following\nthe NGSI-LD  [specification](https://www.etsi.org/deliver/etsi_gs/CIM/001_099/009/01.03.01_60/gs_cim009v010301p.pdf)  and has been assigned `type=Product`.\n\n---\nSubsequent requests using the same `id` will result in an error response."
-			},
-			"response": []
-		},
-		{
 			"name": "List all Data Entities (verbose)",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://{{orion}}/v2/entities/?type=Product",
+					"raw": "http://localhost:1026/v2/entities/",
 					"protocol": "http",
 					"host": [
-						"{{orion}}"
+						"localhost"
 					],
+					"port": "1026",
 					"path": [
 						"v2",
 						"entities",
 						""
-					],
-					"query": [
-						{
-							"key": "type",
-							"value": "Product"
-						}
 					]
 				},
 				"description": "This example lists the full context of all **Product** entities.\n\nFull context data  for a specified entity type can be retrieved by making a GET request to the `/v2/entities/` endpoint and supplying the `type` parameter."
@@ -68,18 +33,84 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://{{orion}}/v2/entities/urn:ngsi-ld:Product:010",
+					"raw": "http://localhost:1026/v2/entities/urn:ngsiv2:i40Asset:Workstation:002",
 					"protocol": "http",
 					"host": [
-						"{{orion}}"
+						"localhost"
 					],
+					"port": "1026",
 					"path": [
 						"v2",
 						"entities",
-						"urn:ngsi-ld:Product:010"
+						"urn:ngsiv2:i40Asset:Workstation:002"
 					]
 				},
 				"description": "\n"
+			},
+			"response": []
+		},
+		{
+			"name": "(Partial Entities) Show the Physical Model Relationships only",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:1026/v2/entities/?type=i40Asset&options=count&attrs=hasParentI40Asset",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "1026",
+					"path": [
+						"v2",
+						"entities",
+						""
+					],
+					"query": [
+						{
+							"key": "type",
+							"value": "i40Asset",
+							"description": "Entity type"
+						},
+						{
+							"key": "options",
+							"value": "count",
+							"description": "* `keyValues` option in order to get a more compact and brief representation, including just attribute values\n* `values` option combined with a list of attribute values  `attrs`  for an ordered list of attributes only"
+						},
+						{
+							"key": "attrs",
+							"value": "hasParentI40Asset",
+							"description": "Ordered list of attribute names to display"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "(Filtering) Show \"Site001\" Areas",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:1026/v2/entities/?q=hasParentI40Asset==urn:ngsiv2:i40Asset:Site:001",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "1026",
+					"path": [
+						"v2",
+						"entities",
+						""
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "hasParentI40Asset==urn:ngsiv2:i40Asset:Site:001"
+						}
+					]
+				}
 			},
 			"response": []
 		}

@@ -16,13 +16,20 @@ import library as lib
 #---------------
 def create_factory():
     lib.create_i40_asset("urn:ngsiv2:i40Asset:Site:001", "i40Asset", "Site")
-    lib.create_i40_asset("urn:ngsiv2:i40Asset:Area:001", "i40Asset", "Area")
-    lib.create_i40_asset("urn:ngsiv2:i40Asset:Area:002", "i40Asset", "Area")
-    lib.create_i40_asset("urn:ngsiv2:i40Asset:Workstation:001", "i40Asset", "Workstation")
-    lib.create_i40_asset("urn:ngsiv2:i40Asset:Workstation:002", "i40Asset", "Workstation")
-    lib.create_i40_asset("urn:ngsiv2:i40Asset:Unit:001a", "i40Asset", "Unit")
-    lib.create_i40_asset("urn:ngsiv2:i40Asset:Unit:002a", "i40Asset", "Unit")
-    lib.create_i40_asset("urn:ngsiv2:i40Asset:Unit:002b", "i40Asset", "Unit")
+    lib.create_i40_asset("urn:ngsiv2:i40Asset:Area:001", "i40Asset", "Area",
+                         hasParentI40Asset="urn:ngsiv2:i40Asset:Site:001")
+    lib.create_i40_asset("urn:ngsiv2:i40Asset:Area:002", "i40Asset", "Area",
+                         hasParentI40Asset="urn:ngsiv2:i40Asset:Site:001")
+    lib.create_i40_asset("urn:ngsiv2:i40Asset:Workstation:001", "i40Asset", "Workstation",
+                         hasParentI40Asset="urn:ngsiv2:i40Asset:Area:001")
+    lib.create_i40_asset("urn:ngsiv2:i40Asset:Workstation:002", "i40Asset", "Workstation",
+                         hasParentI40Asset="urn:ngsiv2:i40Asset:Area:002")
+    lib.create_i40_asset("urn:ngsiv2:i40Asset:Unit:001a", "i40Asset", "Unit",
+                         hasParentI40Asset="urn:ngsiv2:i40Asset:Workstation:001")
+    lib.create_i40_asset("urn:ngsiv2:i40Asset:Unit:002a", "i40Asset", "Unit",
+                         hasParentI40Asset="urn:ngsiv2:i40Asset:Workstation:002")
+    lib.create_i40_asset("urn:ngsiv2:i40Asset:Unit:002b", "i40Asset", "Unit",
+                         hasParentI40Asset="urn:ngsiv2:i40Asset:Workstation:002")
     create_advanced_asset_attributes("urn:ngsiv2:i40Asset:Workstation:002")
 
 # CREATE Advanced Asset Attributes: i40AssetName, i40AssetState
