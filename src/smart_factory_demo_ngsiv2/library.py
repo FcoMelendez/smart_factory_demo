@@ -1,6 +1,10 @@
 import requests
 import json
 
+# Library configuration params:
+orion_ip = "localhost"
+orion_port = "1026"
+
 # Interface Examples:
 # - CREATE an i40Asset
 # - CREATE an i40Asset Attribute
@@ -61,7 +65,7 @@ def create_i40_asset(entity_id, entity_type, i40assetType, i40AssetName = None,
             payload_dict["oeeObject"]["value"]= json.dumps(oeeObject)
     
 
-    url = "http://localhost:1026/v2/entities/"
+    url = "http://"+orion_ip+":"+orion_port+"/v2/entities/"
 
     payload= json.dumps(payload_dict)
     headers = {'Content-Type': 'application/json'}
@@ -71,7 +75,7 @@ def create_i40_asset(entity_id, entity_type, i40assetType, i40AssetName = None,
 # CREATE a new i40Asset Attribute
 #--------------------------------
 def create_i40_asset_attribute (entity_id, attr_id, attr_type, attr_value):
-    url = "http://localhost:1026/v2/entities/"+str(entity_id)+"/attrs"
+    url = "http://"+orion_ip+":"+orion_port+"/v2/entities/"+str(entity_id)+"/attrs"
     attribute = {}
     attribute[str(attr_id)] = {}
     attribute[str(attr_id)]["type"] = attr_type
@@ -84,7 +88,7 @@ def create_i40_asset_attribute (entity_id, attr_id, attr_type, attr_value):
 # UPDATE an i40Asset Attribute
 #--------------------------------
 def update_i40_asset_attribute (entity_id, attr_id, attr_value):
-    url = "http://localhost:1026/v2/entities/"+str(entity_id)+"/attrs/"+str(attr_id)+"/value"
+    url = "http://"+orion_ip+":"+orion_port+"/v2/entities/"+str(entity_id)+"/attrs/"+str(attr_id)+"/value"
     content_type = "text/plain"
     attribute = json.dumps(attr_value)
     if type(attr_value) is dict:
@@ -97,7 +101,7 @@ def update_i40_asset_attribute (entity_id, attr_id, attr_value):
 # DELETE an i40Asset
 #-------------------
 def delete_i40_asset(entity_id):
-    url = "http://localhost:1026/v2/entities/"+str(entity_id)
+    url = "http://"+orion_ip+":"+orion_port+"/v2/entities/"+str(entity_id)
     payload={}
     headers = {}
     response = requests.request("DELETE", url, headers=headers, data=payload)
